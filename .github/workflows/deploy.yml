@@ -20,7 +20,7 @@ jobs:
           npm run build
           # Or composer install --no-dev --optimize-autoloader
 
-      - name: Deploy to cPanel with FTPs
+      - name: Deploy to cPanel with FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
