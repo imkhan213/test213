@@ -21,7 +21,6 @@ jobs:
           # Or composer install --no-dev --optimize-autoloader
 
       - name: Deploy to cPanel with FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
