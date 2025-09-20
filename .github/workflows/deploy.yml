@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
-          local-dir: ./dist     # adjust if your build output folder differs
+          local-dir: ./     # adjust if your build output folder differs
           server-dir: ${{ secrets.FTP_TARGET }}
           method: ftps           # or sftp if supported
           exclude: |
