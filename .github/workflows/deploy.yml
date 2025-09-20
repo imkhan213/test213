@@ -1,36 +1,29 @@
-name: Deploy to cPanel via FTP
+name: Deploy static site to cPanel via FTP
 
 on:
   push:
     branches:
-      - master   # or master, whichever branch you deploy
+      - master   # deploy only when pushing to main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Example: install dependencies & build (adjust if not needed)
-      - name: Build project
-        run: |
-          npm ci
-          npm run build
-          # Or composer install --no-dev --optimize-autoloader
-
-      - name: Deploy to cPanel with FTPs
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      - name: Deploy to cPanel with FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
-          local-dir: ./     # adjust if your build output folder differs
           server-dir: ${{ secrets.FTP_TARGET }}
-          method: ftps           # or sftp if supported
+          local-dir: ./          # upload everything in repo root
+          protocol: ftps         # try 'ftp' if your host doesn’t support FTPS
           exclude: |
             **/.git*
             **/.github*
-            **/node_modules/*
+            README.md
